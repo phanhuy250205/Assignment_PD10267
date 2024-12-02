@@ -1,0 +1,195 @@
+/* Avatar Upload Styles */
+.avatar-upload {
+    position: relative;
+    max-width: 160px;
+    margin: 0 auto 20px;
+}
+
+.avatar-preview {
+    width: 160px;
+    height: 160px;
+    position: relative;
+    border-radius: 50%;
+    border: 6px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-upload label {
+    width: 100%;
+    padding: 8px 16px;
+    text-align: center;
+    background: #4A90E2;
+    color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: block;
+}
+
+.avatar-upload label:hover {
+    background: #357ABD;
+}
+
+.avatar-upload input {
+    display: none;
+}
+
+.default-avatar-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9ecef;
+    color: #6c757d;
+    font-size: 3rem;
+}
+
+/* Main Container Styles */
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #4A90E2 0%, #50B7F5 100%);
+    padding: 2rem;
+}
+
+.register-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Header Styles */
+.register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4A90E2;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Form Styles */
+.form-floating {
+    margin-bottom: 1rem;
+}
+
+.form-control:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 0.25rem rgba(74, 144, 226, 0.25);
+}
+
+/* Password Requirements */
+.password-requirements {
+    background: #F8FAFC;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.requirement-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748B;
+    margin-bottom: 0.5rem;
+}
+
+.requirement-item i {
+    color: #10B981;
+}
+
+/* Role Selection */
+.role-description {
+    background: #F8FAFC;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.role-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.role-info.active {
+    background: white;
+    border-color: #4A90E2;
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
+}
+
+/* Button Styles */
+.register-btn {
+    background: #4A90E2;
+    border: none;
+    padding: 1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.register-btn:hover {
+    background: #357ABD;
+}
+
+/* Social Login */
+.social-register {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid #E2E8F0;
+    border-radius: 0.5rem;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    background: #F8FAFC;
+    color: #2C3E50;
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+    .social-register {
+        grid-template-columns: 1fr;
+    }
+
+    .register-card {
+        padding: 1.5rem;
+    }
+}

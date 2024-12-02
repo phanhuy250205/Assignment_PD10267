@@ -1,10 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 17/11/2024
-  Time: 8:46 pm
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="entity.VideoEntity" %>
+<%@ page import="java.util.List" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -58,20 +54,57 @@
             <i class="bi bi-bell"></i>
             <span class="notification-badge">3</span>
         </button>
-        <a href="${pageContext.request.contextPath}/login.jsp" class="user-menu">
-            <img src="https://picsum.photos/32/32?random=1" alt="User" />
-            <span>Đăng nhập</span>
-        </a>
-    </div>
+            <%
+            String fullname = (String) session.getAttribute("fullname");
+            %>
+        <div class="user-menu">
+            <% if (fullname != null) { %>
+            <!-- Khi người dùng đã đăng nhập -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Chào, <%= fullname %>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                    <li>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/changePassword">Đổi mật khẩu</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/thongtin">Cập nhật thông tin</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/listvideo">Đăng xuất</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Quản Lý Kênh</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/share">Quản Lý chia sẽ</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/thongtin">Thay đổi thông tin</a>
+                    </li>
+                </ul>
+            </div>
+            <% }
+            else { %>
+            <!-- Khi người dùng chưa đăng nhập -->
+            <a href="${pageContext.request.contextPath}/login.jsp">
+                <img src="https://picsum.photos/32/32?random=1" alt="User" class="user-avatar" />
+                <span>Đăng nhập</span>
+            </a>
+            <% } %>
+        </div>
+
 </header>
 
 <div class="app-layout">
     <!-- Menu -->
     <nav class="side-menu" id="side-menu">
         <div class="menu-group">
-            <a href="/" class="menu-item active">
+            <a href="${pageContext.request.contextPath}/index" class="menu-item active">
                 <i class="bi bi-house"></i>
-                <span>Dành cho bạn</span>
+                <span>Trang Chủ</span>
             </a>
             <a href="/trending" class="menu-item">
                 <i class="bi bi-fire"></i>
@@ -89,11 +122,11 @@
                 <i class="bi bi-clock-history"></i>
                 <span>Lịch sử xem</span>
             </a>
-            <a href="/later" class="menu-item">
+            <a href="${pageContext.request.contextPath}/listvideo" class="menu-item">
                 <i class="bi bi-bookmark"></i>
-                <span>Xem sau</span>
+                <span>Nhà Phát Triển</span>
             </a>
-            <a href="/liked" class="menu-item">
+            <a href="${pageContext.request.contextPath}/favorites" class="menu-item">
                 <i class="bi bi-heart"></i>
                 <span>Đã thích</span>
             </a>
@@ -119,228 +152,52 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="content-header">
-            <div class="tags-scroll">
-                <button class="tag-btn active">Tất cả</button>
-                <button class="tag-btn">Âm nhạc</button>
-                <button class="tag-btn">Gaming</button>
-                <button class="tag-btn">Tin tức</button>
-                <button class="tag-btn">Phim</button>
-                <button class="tag-btn">Thể thao</button>
-                <button class="tag-btn">Học tập</button>
-            </div>
-        </div>
-
         <div class="video-grid">
+
+            <%
+
+                // Lấy danh sách video từ request
+                List<VideoEntity> videos = (List<entity.VideoEntity>) request.getAttribute("videos");
+                if (videos != null && !videos.isEmpty()) {
+                    for (VideoEntity video : videos) {
+            %>
             <!-- Video Card -->
-            <article class="video-item" data-video-id="dQw4w9WgXcQ">
+            <article class="video-item" data-video-id="<%= video.getId() %>">
                 <div class="thumbnail-wrapper">
-                    <img src="https://picsum.photos/320/180?random=1" alt="Video" />
-                    <span class="duration">15:30</span>
+                    <iframe width="300px" height="200px" src="https://www.youtube.com/embed/<%= video.getPoster() %>"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    <span class="duration">15:30</span> <!-- Thời lượng video nếu có -->
                     <button class="watch-later">
                         <i class="bi bi-clock"></i>
                     </button>
                 </div>
                 <div class="video-content">
                     <img
-                            src="https://picsum.photos/40/40?random=1"
+                            src="https://picsum.photos/40/40?random=<%= video.getId() %>"
                             alt="Channel"
                             class="channel-img"
                     />
                     <div class="video-info">
-                        <h3>Top 10 Ca Khúc Hay Nhất Tháng 3/2024</h3>
-                        <a href="#" class="channel-name">Music Station</a>
+                        <a href="detail?id=<%= video.getId()%>">
+                            <h3><%= video.getTitle()%></h3>
+                        </a>
+                        <a href="#" class="channel-name">Phan Huy</a> <!-- Tên channel nếu có -->
                         <div class="meta-data">
-                            <span>1.2M lượt xem</span>
+                            <span><%= video.getViews() %> lượt xem</span>
                             <span class="separator"></span>
-                            <span>2 ngày trước</span>
+                            <span>2 ngày trước</span> <!-- Thời gian upload nếu cần -->
                         </div>
                     </div>
                 </div>
             </article>
-
-            <!-- More Video Cards -->
-            <article class="video-item" data-video-id="9bZkp7q19f0">
-                <div class="thumbnail-wrapper">
-                    <img src="https://picsum.photos/320/180?random=2" alt="Video" />
-                    <span class="duration">8:45</span>
-                    <button class="watch-later">
-                        <i class="bi bi-clock"></i>
-                    </button>
-                </div>
-                <div class="video-content">
-                    <img
-                            src="https://picsum.photos/40/40?random=2"
-                            alt="Channel"
-                            class="channel-img"
-                    />
-                    <div class="video-info">
-                        <h3>Hướng Dẫn Nấu Món Ngon Cuối Tuần</h3>
-                        <a href="#" class="channel-name">Cooking Time</a>
-                        <div class="meta-data">
-                            <span>856K lượt xem</span>
-                            <span class="separator"></span>
-                            <span>1 tuần trước</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="video-item" data-video-id="kJQP7kiw5Fk">
-                <div class="thumbnail-wrapper">
-                    <img src="https://picsum.photos/320/180?random=3" alt="Video" />
-                    <span class="duration">12:20</span>
-                    <button class="watch-later">
-                        <i class="bi bi-clock"></i>
-                    </button>
-                </div>
-                <div class="video-content">
-                    <img
-                            src="https://picsum.photos/40/40?random=3"
-                            alt="Channel"
-                            class="channel-img"
-                    />
-                    <div class="video-info">
-                        <h3>Review Game Mới Ra Mắt 2024</h3>
-                        <a href="#" class="channel-name">Game World</a>
-                        <div class="meta-data">
-                            <span>2.1M lượt xem</span>
-                            <span class="separator"></span>
-                            <span>3 ngày trước</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="video-item" data-video-id="JGwWNGJdvx8">
-                <div class="thumbnail-wrapper">
-                    <img src="https://picsum.photos/320/180?random=4" alt="Video" />
-                    <span class="duration">15:30</span>
-                    <button class="watch-later">
-                        <i class="bi bi-clock"></i>
-                    </button>
-                </div>
-                <div class="video-content">
-                    <img
-                            src="https://picsum.photos/40/40?random=4"
-                            alt="Channel"
-                            class="channel-img"
-                    />
-                    <div class="video-info">
-                        <h3>Shape of You - Official Music Video</h3>
-                        <a href="#" class="channel-name">Ed Sheeran</a>
-                        <div class="meta-data">
-                            <span>1.2M lượt xem</span>
-                            <span class="separator"></span>
-                            <span>2 ngày trước</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="video-item" data-video-id="pRpeEdMmmQ0">
-                <div class="thumbnail-wrapper">
-                    <img src="https://picsum.photos/320/180?random=5" alt="Video" />
-                    <span class="duration">15:30</span>
-                    <button class="watch-later">
-                        <i class="bi bi-clock"></i>
-                    </button>
-                </div>
-                <div class="video-content">
-                    <img
-                            src="https://picsum.photos/40/40?random=5"
-                            alt="Channel"
-                            class="channel-img"
-                    />
-                    <div class="video-info">
-                        <h3>Hướng dẫn lập trình web cơ bản</h3>
-                        <a href="#" class="channel-name">Tech Learning</a>
-                        <div class="meta-data">
-                            <span>1.2M lượt xem</span>
-                            <span class="separator"></span>
-                            <span>2 ngày trước</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="video-item" data-video-id="M7lc1UVf-VE">
-                <div class="thumbnail-wrapper">
-                    <img src="https://picsum.photos/320/180?random=6" alt="Video" />
-                    <span class="duration">15:30</span>
-                    <button class="watch-later">
-                        <i class="bi bi-clock"></i>
-                    </button>
-                </div>
-                <div class="video-content">
-                    <img
-                            src="https://picsum.photos/40/40?random=6"
-                            alt="Channel"
-                            class="channel-img"
-                    />
-                    <div class="video-info">
-                        <h3>JavaScript Tutorial for Beginners</h3>
-                        <a href="#" class="channel-name">Code Academy</a>
-                        <div class="meta-data">
-                            <span>1.2M lượt xem</span>
-                            <span class="separator"></span>
-                            <span>2 ngày trước</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="video-item" data-video-id="y8Yv4pnO7qc">
-                <div class="thumbnail-wrapper">
-                    <img src="https://picsum.photos/320/180?random=7" alt="Video" />
-                    <span class="duration">15:30</span>
-                    <button class="watch-later">
-                        <i class="bi bi-clock"></i>
-                    </button>
-                </div>
-                <div class="video-content">
-                    <img
-                            src="https://picsum.photos/40/40?random=7"
-                            alt="Channel"
-                            class="channel-img"
-                    />
-                    <div class="video-info">
-                        <h3>Tổng hợp nhạc chill cuối tuần</h3>
-                        <a href="#" class="channel-name">Chill Music</a>
-                        <div class="meta-data">
-                            <span>1.2M lượt xem</span>
-                            <span class="separator"></span>
-                            <span>2 ngày trước</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="video-item" data-video-id="SlPhMPnQ58k">
-                <div class="thumbnail-wrapper">
-                    <img src="https://picsum.photos/320/180?random=8" alt="Video" />
-                    <span class="duration">25:15</span>
-                    <button class="watch-later">
-                        <i class="bi bi-clock"></i>
-                    </button>
-                </div>
-                <div class="video-content">
-                    <img
-                            src="https://picsum.photos/40/40?random=8"
-                            alt="Channel"
-                            class="channel-img"
-                    />
-                    <div class="video-info">
-                        <h3>Tin Tức Công Nghệ Trong Tuần</h3>
-                        <a href="#" class="channel-name">Tech News</a>
-                        <div class="meta-data">
-                            <span>750K lượt xem</span>
-                            <span class="separator"></span>
-                            <span>5 ngày trước</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
+            <%
+                }
+            } else {
+            %>
+            <p>Không có video nào được kích hoạt.</p>
+            <% } %>
         </div>
     </main>
 </div>
@@ -348,4 +205,24 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/src/assets/js/main.js"></script>
 </body>
+<style>
+    .user-menu {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-menu img {
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+    }
+
+    .user-menu span {
+        font-weight: bold;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
 </html>

@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
-             version="3.2">
-    <persistence-unit name="default">
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                 https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="QLVideo" transaction-type="RESOURCE_LOCAL">
+        <!-- Chỉ định provider JPA sử dụng Hibernate -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <!-- Danh sách các entity class -->
+        <class>entity.Usersentity</class>
+        <class>entity.Favoritesentity</class>
+        <class>entity.VideoEntity</class>
+
+
+        <class>entity.Sharesentity</class>
+        <class>entity.Comment</class>
+
+        <!-- Các thuộc tính cấu hình của JPA -->
+        <properties>
+            <!-- Cấu hình kết nối với SQL Server -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=quanlyvideo"/>
+            <property name="jakarta.persistence.jdbc.user" value="huy"/>
+            <property name="jakarta.persistence.jdbc.password" value="123456"/>
+
+            <!-- Hibernate Dialect for SQL Server -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+
+            <!-- Hiển thị SQL trong log -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+            <!-- Chế độ cập nhật cơ sở dữ liệu -->
+<!--            <property name="hibernate.hbm2ddl.auto" value="update"/>-->
+
+            <!-- Cấu hình lazy loading, nếu cần thiết -->
+            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
+
+
+
+        </properties>
     </persistence-unit>
 </persistence>

@@ -11,14 +11,14 @@
 .video-container {
   background: var(--bg-light);
   border-radius: 16px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .video-player {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .video-player iframe {
@@ -223,7 +223,6 @@
 
 .related-item {
   display: flex;
-  gap: 1rem;
   cursor: pointer;
 }
 
@@ -323,11 +322,11 @@
   .detail-content {
     grid-template-columns: 1fr;
   }
-  
+
   .related-videos {
     margin-top: 2rem;
   }
-  
+
   .related-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -339,32 +338,76 @@
   .detail-content {
     padding: 1rem;
   }
-  
+
   .meta-bar {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .action-buttons {
     width: 100%;
     justify-content: space-between;
   }
-  
+
   .channel-info {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .channel-main {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .related-list {
     grid-template-columns: 1fr;
   }
-  
+
   .comment-form {
     flex-direction: column;
   }
+}
+.comment {
+
+
+  padding: 15px;
+  margin: 10px 0;
+
+  font-family: 'Arial', sans-serif;
+}
+
+.comment h6 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.comment strong {
+  font-size: 1rem;
+  color: #007bff;
+}
+
+.comment p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+
+.comment small {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+
+
+.comment h6, .comment p {
+  transition: color 0.3s;
+}
+
+.comment h6:hover, .comment p:hover {
+  color: #007bff;
 }
