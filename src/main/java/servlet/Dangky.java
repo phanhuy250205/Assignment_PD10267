@@ -9,16 +9,11 @@ import jakarta.servlet.http.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import until.mahoamatkhau;
 
 @WebServlet("/dangky")
 @MultipartConfig  // Chú thích này để kích hoạt upload file
 public class Dangky extends HttpServlet {
-
-
-
 
     // Hàm upload ảnh
     private String uploadFile(HttpServletRequest req) throws IOException, ServletException {
@@ -82,16 +77,6 @@ public class Dangky extends HttpServlet {
             req.getRequestDispatcher("/register.jsp").forward(req, resp);
             return;
         }
-        mahoamatkhau hashUtil = new mahoamatkhau();
-        // Mã hóa mật khẩu
-        try {
-            password = hashUtil.hashPasswordWithMD5(password);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            req.setAttribute("error", "Đã xảy ra lỗi khi mã hóa mật khẩu.");
-            req.getRequestDispatcher("/register.jsp").forward(req, resp);
-            return;
-        }
 
         // Xác định vai trò (quản trị viên hoặc người dùng thông thường)
         boolean isAdmin = "admin".equals(userRole);
@@ -108,11 +93,10 @@ public class Dangky extends HttpServlet {
         }
 
         // Tạo đối tượng người dùng
-
         Usersentity use = new Usersentity();
         use.setFullname(fullname);
         use.setEmail(email);
-        use.setPassword(password);
+        use.setPassword(password); // Không mã hóa mật khẩu
         use.setAdmin(isAdmin);
         use.setImage(imagePath);  // Lưu tên ảnh
 

@@ -14,7 +14,6 @@ import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,7 +32,6 @@ public class Thaydoithongtin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         HttpSession session = req.getSession(false);  // Lấy session hiện tại (nếu có)
 
         if (session != null && session.getAttribute("userId") != null) {
@@ -100,7 +98,6 @@ public class Thaydoithongtin extends HttpServlet {
 
                 // Thay vì lưu đường dẫn đầy đủ, chỉ lưu tên tệp ảnh
                 newImagePath = uniqueFileName; // Lưu chỉ tên tệp, không cần "/assets/img/"
-
             }
 
             // Cập nhật thông tin người dùng

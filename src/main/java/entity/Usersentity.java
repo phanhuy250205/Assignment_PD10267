@@ -111,15 +111,15 @@ public class Usersentity {
 
     @Override
     public String toString() {
-        return "Users entity{" +
+        return "Usersentity{" +
                 "id=" + id +
                 ", fullname='" + fullname + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", admin=" + admin +
-                ", favorites entities=" + favoritesentities +
-                ", comments=" + comments +
+                ", favoritesCount=" + (favoritesentities != null ? favoritesentities.size() : 0) + // Chỉ in ra số lượng items
+                ", commentsCount=" + (comments != null ? comments.size() : 0) + // Chỉ in ra số lượng comments
                 ", image='" + image + '\'' +
                 '}';
     }
+
 }

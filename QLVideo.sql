@@ -147,4 +147,14 @@ SELECT * from Video
 SELECT * from Share 
 SELECT * from Users
 SELECT * from Favorite
+SELECT * from Comments
 SELECT * FROM Video WHERE Title LIKE 'Sample Video 1'
+
+SELECT c.CommentText, c.CommentDate, u.fullname
+FROM Comments c
+JOIN Users u ON c.UserId = u.id
+WHERE c.VideoId = 2
+
+SELECT * FROM comments WHERE videoId = 2;
+
+SELECT * FROM users WHERE email = huy@gmail.com' AND password = 'your_hashed_password';

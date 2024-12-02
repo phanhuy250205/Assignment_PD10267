@@ -73,10 +73,11 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "id=" + id +
-                ", user=" + user +
-                ", video=" + video +
                 ", commentText='" + commentText + '\'' +
                 ", commentDate=" + commentDate +
+                ", userId=" + (user != null ? user.getId() : null) +  // In ra ID của user, không in toàn bộ đối tượng
+                ", videoId=" + (video != null ? video.getId() : null) +  // In ra ID của video, không in toàn bộ đối tượng
                 '}';
     }
+
 }

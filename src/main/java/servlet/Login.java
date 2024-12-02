@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import until.mahoamatkhau;
 
 import java.io.IOException;
 
@@ -48,11 +47,9 @@ public class Login extends HttpServlet {
             }
 
             // Mã hóa mật khẩu người dùng nhập vào
-            mahoamatkhau hashUtil = new mahoamatkhau();
-            String hashedPassword = hashUtil.hashPasswordWithMD5(password);
 
             // Tìm người dùng trong cơ sở dữ liệu với mật khẩu đã mã hóa
-            Usersentity user = userDao.findByUsernameAndPassword(username, hashedPassword);
+            Usersentity user = userDao.findByUsernameAndPassword(username,password);
 
             if (user != null) {
                 // Nếu đăng nhập thành công, lưu thông tin vào session
