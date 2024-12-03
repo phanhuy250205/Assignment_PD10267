@@ -54,6 +54,8 @@ public class FavoriteServlet extends HttpServlet {
                 // Lấy danh sách yêu thích của người dùng
                 List<Favoritesentity> favorites = favoriteDao.findFavoritesByUser(user);
                 req.setAttribute("favorites", favorites);  // Truyền dữ liệu yêu thích tới view
+                req.setAttribute("userImage", user.getImage());  // Truyền hình ảnh của người dùng tới view
+
                 req.getRequestDispatcher("/favories.jsp").forward(req, resp);  // Hiển thị trang favorites.jsp
             } else {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");

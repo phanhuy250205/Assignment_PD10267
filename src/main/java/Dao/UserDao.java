@@ -157,6 +157,28 @@ public class UserDao implements  GenericDao<Usersentity> {
         return false;  // Nếu không tìm thấy người dùng hoặc có lỗi
     }
 
+    public String findUploaderFullnameByVideoId(Long videoId) {
+        try {
+            // Truy vấn để lấy fullname của người đăng video thông qua videoId
+            String jpql = "SELECT u.fullname FROM Usersentity u JOIN VideoEntity v ON u.id = v.user.id WHERE v.id = :videoId";
+
+            TypedQuery<String> query = em.createQuery(jpql, String.class);
+            query.setParameter("videoId", videoId);
+
+            // Trả về fullname của người đăng video
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            // Nếu không tìm thấy người đăng video, trả về null
+            return null;
+        } catch (Exception e) {
+            // Xử lý các ngoại lệ khác nếu có
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
 
 
 }

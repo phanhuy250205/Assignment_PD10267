@@ -3,6 +3,7 @@ package Dao;
 import entity.VideoEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import until.XJPA;
 
@@ -127,11 +128,41 @@ public class VideosDao  implements  GenericDao<VideoEntity>{
         }
     }
     public List<VideoEntity> findActiveVideos() {
-        // Sử dụng JPQL để truy vấn các video có active = true
-        String jpql = "SELECT v FROM VideoEntity v WHERE v.active = true";
+        // Sử dụng JPQL để lấy video và fullname của người đăng
+        String jpql = "SELECT v FROM VideoEntity v JOIN FETCH v.user WHERE v.active = true";
         TypedQuery<VideoEntity> query = em.createQuery(jpql, VideoEntity.class);
         return query.getResultList();
     }
+    public long countVideosByUserId(long userId) {
+        // Viết truy vấn SQL để tính tổng số video của người dùng theo userId
+        String sql = "SELECT COUNT(*) FROM VideoEntity v WHERE v.user.id = :userId"; // Câu truy vấn SQL đúng
+
+        // Tạo truy vấn
+        Query query = em.createQuery(sql); // Dùng createQuery thay vì createNativeQuery
+
+        // Gán tham số userId vào truy vấn
+        query.setParameter("userId", userId);
+
+        // Thực hiện truy vấn và lấy kết quả
+        long totalVideos = ((Number) query.getSingleResult()).longValue();
+        return totalVideos;
+    }
+    public long countTotalViewsByUserId(long userId) {
+        // Viết truy vấn SQL để tính tổng số lượt xem của người dùng theo userId
+        String sql = "SELECT SUM(v.views) FROM VideoEntity v WHERE v.user.id = :userId";
+
+        // Tạo truy vấn
+        Query query = em.createQuery(sql);
+        query.setParameter("userId", userId); // Gán tham số userId vào truy vấn
+
+        // Thực hiện truy vấn và lấy kết quả
+        Long totalViews = (Long) query.getSingleResult();
+
+        // Nếu không có video, trả về 0
+        return totalViews != null ? totalViews : 0;
+    }
+
+
 }
 
 

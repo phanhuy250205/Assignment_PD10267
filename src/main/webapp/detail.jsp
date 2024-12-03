@@ -25,6 +25,9 @@
 <body>
 
 <%
+
+  String fullname = (String) session.getAttribute("fullname");
+
   String message = (String) session.getAttribute("message");
   if (message != null) {
     session.removeAttribute("message"); // Xóa thông báo sau khi hiển thị
@@ -52,9 +55,10 @@
       <i class="bi bi-bell"></i>
       <span class="notification-badge">3</span>
     </button>
+<%--    Thêm tên--%>
     <a href="/login" class="user-menu">
       <img src="https://picsum.photos/32/32?random=1" alt="User">
-      <span>Đăng nhập</span>
+      <span><%= fullname%></span>
     </a>
   </div>
 </header>
@@ -90,7 +94,7 @@
             </c:if>
           </div>
             <div>
-              <span class="views">${videoDetail.title} Lượt xem</span>
+              <span class="views">${videoDetail.title} </span>
             </div>
           <div class="video-info">
             <div class="meta-bar">

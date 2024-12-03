@@ -250,7 +250,7 @@ public class Videolist extends HttpServlet {
     private void listVideo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Lấy thông tin userId từ session và chuyển đổi sang Long (kiểu Long đã được lưu trong session)
         Long userId = (Long) req.getSession().getAttribute("userId"); // Đảm bảo kiểu Long
-
+        Usersentity user = userDao.findById(String.valueOf(userId));
         // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
         if (userId == null) {
             resp.sendRedirect("login.jsp");
@@ -260,10 +260,13 @@ public class Videolist extends HttpServlet {
         try {
             // Lấy danh sách video của người dùng từ VideosDao
             List<VideoEntity> videos = videosDao.findVideosByUser(userId);
-
+            long totalVideos = videosDao.countVideosByUserId(userId);
+            long totalViews = videosDao.countTotalViewsByUserId(userId);
             // Đưa danh sách video vào request để hiển thị trên trang
             req.setAttribute("videos", videos);
-
+            req.setAttribute("userImage", user.getImage());
+            req.setAttribute("totalVideos", totalVideos);
+            req.setAttribute("totalViews", totalViews);
             // Chuyển hướng đến trang quản lý video
             req.getRequestDispatcher("/quanlyvideo.jsp").forward(req, resp);
 
@@ -369,6 +372,15 @@ public class Videolist extends HttpServlet {
                 return;
             }
 
+            String shareLink = "https://yourdomain.com/watch?id=" + videoId;
+            String videoSrc = "https://www.youtube.com/embed/" + video.getPoster(); // Giả định youtubeId có trong VideoEntity
+
+            // Đưa link chia sẻ và link video vào request
+            request.setAttribute("shareLink", shareLink);
+            request.setAttribute("videoSrc", videoSrc);
+
+            // Chuyển hướng tới copylink.jsp
+
             // Kiểm tra user tồn tại và lấy thông tin người dùng
             Usersentity user = userDao.findById(String.valueOf(userId));
             if (user == null) {
@@ -408,7 +420,7 @@ public class Videolist extends HttpServlet {
             request.getSession().setAttribute("message", "Video đã được chia sẻ thành công.");
 
             // Redirect tới trang chi tiết video
-            response.sendRedirect("detail.jsp?id=" + videoId);
+            request.getRequestDispatcher("/linkchiase.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Định dạng Video ID không hợp lệ.");
@@ -417,6 +429,9 @@ public class Videolist extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Đã xảy ra lỗi khi xử lý yêu cầu.");
         }
     }
+
+
+
     private void comment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Lấy các thông tin từ request
         String videoId = request.getParameter("videoId");

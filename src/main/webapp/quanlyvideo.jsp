@@ -58,7 +58,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <img src="https://via.placeholder.com/40" alt="Logo" class="logo">
+            <img src="https://media.istockphoto.com/id/1979289147/vi/anh/khoa-h%E1%BB%8Dc-ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0-d%E1%BB%AF-li%E1%BB%87u-l%E1%BB%9Bn-v%E1%BB%9Bi-c%C3%B4ng-ngh%E1%BB%87-ai-nh%C3%A0-ph%C3%A2n-t%C3%ADch-ho%E1%BA%B7c-nh%C3%A0-khoa-h%E1%BB%8Dc-s%E1%BB%AD.jpg?s=2048x2048&w=is&k=20&c=kHpQ9kVVIpug7OKpx9rJCdxeL3ZeqfRr02XfT-PlxhE=" alt="Logo" class="logo">
             <h1>Dashboard</h1>
         </div>
         <nav class="sidebar-nav">
@@ -67,19 +67,19 @@
                 <span>Videos</span>
                 <span class="badge bg-primary">24</span>
             </a>
-            <a href="${pageContext.request.contextPath}/users.jsp" class="nav-link">
+            <a href="${pageContext.request.contextPath}/listUsers" class="nav-link">
                 <i class="fas fa-users"></i>
                 <span>Users</span>
                 <span class="badge bg-info">12</span>
             </a>
-            <a href="${pageContext.request.contextPath}/admin/dashboard.jsp" class="nav-link">
-                <i class="fas fa-chart-bar"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-cog"></i>
-                <span>Chỉnh sửa video </span>
-            </a>
+<%--            <a href="${pageContext.request.contextPath}/admin/dashboard.jsp" class="nav-link">--%>
+<%--                <i class="fas fa-chart-bar"></i>--%>
+<%--                <span>Dashboard</span>--%>
+<%--            </a>--%>
+<%--            <a href="#" class="nav-link">--%>
+<%--                <i class="fas fa-cog"></i>--%>
+<%--                <span>Chỉnh sửa video </span>--%>
+<%--            </a>--%>
         </nav>
     </aside>
 
@@ -101,7 +101,8 @@
                 </button>
 
                 <div class="user-menu">
-                    <img src="https://via.placeholder.com/32" alt="User" class="user-avatar">
+
+                    <img src="${pageContext.request.contextPath}/assets/img/${userImage != null && !userImage.isEmpty() ? userImage : 'default-avatar.png'}" alt="Avatar" class="user-avatar" />
                     <span class="user-name"> <%= fullname %></span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
@@ -125,8 +126,8 @@
                     </div>
                     <div class="stat-info">
                         <h3>Total Videos</h3>
-                        <p>245</p>
-                        <span class="trend positive">↑ 12% from last month</span>
+                        <p>${totalVideos}</p>
+
                     </div>
                 </div>
                 <div class="stat-card">
@@ -135,18 +136,8 @@
                     </div>
                     <div class="stat-info">
                         <h3>Total Views</h3>
-                        <p>1.2M</p>
-                        <span class="trend positive">↑ 8% from last month</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1);">
-                        <i class="fas fa-clock" style="color: #F59E0B;"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Watch Time</h3>
-                        <p>45.2K hrs</p>
-                        <span class="trend negative">↓ 5% from last month</span>
+                        <p>${totalViews}</p>
+
                     </div>
                 </div>
                 <div class="stat-card">
@@ -156,7 +147,7 @@
                     <div class="stat-info">
                         <h3>Likes</h3>
                         <p>52.1K</p>
-                        <span class="trend positive">↑ 15% from last month</span>
+
                     </div>
                 </div>
             </div>

@@ -27,9 +27,12 @@
                     <i class="bi bi-bell"></i>
                     <span class="notification-badge">5</span>
                 </button>
+                <%
+                    String fullname = (String) session.getAttribute("fullname");
+                %>
                 <div class="user-menu">
                     <img src="https://picsum.photos/32" alt="User avatar" class="user-avatar">
-                    <span>John Doe</span>
+                    <span><%= fullname%></span>
                     <i class="bi bi-chevron-down"></i>
                 </div>
             </div>

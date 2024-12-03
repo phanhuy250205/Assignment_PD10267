@@ -9,5 +9,13 @@
     </servlet-mapping>
 
 
+    <filter>
+        <filter-name>ViewCountFilter</filter-name>
+        <filter-class>Filter.ViewCountFilter</filter-class>
+    </filter>
 
+    <filter-mapping>
+        <filter-name>ViewCountFilter</filter-name>
+        <url-pattern>/video/*</url-pattern> <!-- Thay đổi URL cho phù hợp -->
+    </filter-mapping>
 </web-app>

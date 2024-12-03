@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/favorites.css">
 </head>
 <body>
+<%
+    String fullname = (String) session.getAttribute("fullname");
+%>
 <!-- Header -->
 <header class="app-header">
     <div class="header-content">
@@ -36,19 +39,16 @@
         <div class="header-right">
 
             <div class="user-menu">
-                <img src="https://picsum.photos/32" alt="User avatar" class="user-avatar">
+                <img src="${pageContext.request.contextPath}/assets/img/${userImage != null && !userImage.isEmpty() ? userImage : 'default-avatar.png'}" alt="Avatar" class="user-avatar" />
                 <div class="user-dropdown">
                     <div class="dropdown-header">
-                        <img src="https://picsum.photos/64" alt="User avatar">
+                        <img src="${pageContext.request.contextPath}/assets/img/${userImage != null && !userImage.isEmpty() ? userImage : 'default-avatar.png'}" alt="Avatar" id="avatarPreview" />
                         <div class="user-info">
-                            <h4>John Doe</h4>
-                            <p>@johndoe</p>
+                            <h4><%= fullname%></h4>
                         </div>
                     </div>
                     <div class="dropdown-body">
-                        <a href="/profile"><i class="fas fa-user"></i> Hồ sơ</a>
-                        <a href="/settings"><i class="fas fa-cog"></i> Cài đặt</a>
-                        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                        <a href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
                     </div>
                 </div>
             </div>

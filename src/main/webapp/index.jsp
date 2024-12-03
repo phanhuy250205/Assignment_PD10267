@@ -25,8 +25,39 @@
 </head>
 <body>
 <!-- Header -->
+<script>
+    // Hàm tìm kiếm video
+    function searchVideos(event) {
+        event.preventDefault();  // Ngừng gửi form
+
+        var keyword = document.getElementById("keyword").value.toLowerCase();  // Lấy từ khóa tìm kiếm và chuyển thành chữ thường
+
+        // Kiểm tra nếu không có từ khóa tìm kiếm
+        if (!keyword) {
+            alert("Vui lòng nhập từ khóa tìm kiếm");
+            return;
+        }
+
+        // Lấy tất cả các video trong grid
+        var videoCards = document.querySelectorAll(".video-item");
+
+        // Duyệt qua từng video
+        videoCards.forEach(function (videoCard) {
+            // Lấy tiêu đề video
+            var title = videoCard.querySelector("h3").textContent.toLowerCase();
+
+            // Kiểm tra xem tiêu đề video có chứa từ khóa tìm kiếm không
+            if (title.includes(keyword)) {
+                videoCard.style.display = "block";  // Hiển thị video nếu có kết quả tìm thấy
+            } else {
+                videoCard.style.display = "none";  // Ẩn video nếu không tìm thấy
+            }
+        });
+    }
+</script>
 <header class="main-header">
     <div class="header-left">
+
         <button class="menu-trigger" id="menu-toggle">
             <i class="bi bi-list"></i>
         </button>
@@ -38,11 +69,9 @@
 
     <div class="search-box">
         <div class="search-wrapper">
-            <i class="bi bi-search search-icon"></i>
-            <input type="text" placeholder="Tìm kiếm video..." />
-            <button class="voice-search">
-                <i class="bi bi-mic"></i>
-            </button>
+            <form id="search-form" onsubmit="searchVideos(event);">
+                <input type="text" id="keyword" name="keyword" placeholder="Nhập từ khóa tìm kiếm..." value="${param.keyword}">
+            </form>
         </div>
     </div>
 
@@ -55,8 +84,9 @@
             <span class="notification-badge">3</span>
         </button>
             <%
-            String fullname = (String) session.getAttribute("fullname");
-            %>
+    String fullname = (String) session.getAttribute("fullname");
+    Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+%>
         <div class="user-menu">
             <% if (fullname != null) { %>
             <!-- Khi người dùng đã đăng nhập -->
@@ -72,22 +102,25 @@
                     <li>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/thongtin">Cập nhật thông tin</a>
                     </li>
+
+                    <% if (isAdmin != null && isAdmin) { %>
+                    <!-- Các mục chỉ hiển thị cho admin -->
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/listvideo">Đăng xuất</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/listvideo">Nhà Phát triển</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Quản Lý Kênh</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/share">Quản lý chia sẻ</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/share">Quản Lý chia sẽ</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/changePassword">Đổi mật khẩu</a>
                     </li>
+                    <% } %>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/thongtin">Thay đổi thông tin</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
                     </li>
                 </ul>
             </div>
-            <% }
-            else { %>
+            <% } else { %>
             <!-- Khi người dùng chưa đăng nhập -->
             <a href="${pageContext.request.contextPath}/login.jsp">
                 <img src="https://picsum.photos/32/32?random=1" alt="User" class="user-avatar" />
@@ -95,7 +128,6 @@
             </a>
             <% } %>
         </div>
-
 </header>
 
 <div class="app-layout">
@@ -122,10 +154,7 @@
                 <i class="bi bi-clock-history"></i>
                 <span>Lịch sử xem</span>
             </a>
-            <a href="${pageContext.request.contextPath}/listvideo" class="menu-item">
-                <i class="bi bi-bookmark"></i>
-                <span>Nhà Phát Triển</span>
-            </a>
+
             <a href="${pageContext.request.contextPath}/favorites" class="menu-item">
                 <i class="bi bi-heart"></i>
                 <span>Đã thích</span>
@@ -180,10 +209,10 @@
                             class="channel-img"
                     />
                     <div class="video-info">
-                        <a href="detail?id=<%= video.getId()%>">
-                            <h3><%= video.getTitle()%></h3>
+                        <a href="detail?id=<%= video.getId() %>">
+                            <h3><%= video.getTitle() %></h3>
                         </a>
-                        <a href="#" class="channel-name">Phan Huy</a> <!-- Tên channel nếu có -->
+                        <a href="#" class="channel-name"><%=video.getUser().getFullname() %></a> <!-- Tên channel nếu có -->
                         <div class="meta-data">
                             <span><%= video.getViews() %> lượt xem</span>
                             <span class="separator"></span>
@@ -196,7 +225,7 @@
                 }
             } else {
             %>
-            <p>Không có video nào được kích hoạt.</p>
+            <p>Mời bạn đăng nhập mới xem được video</p>
             <% } %>
         </div>
     </main>

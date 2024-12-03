@@ -1,6 +1,7 @@
 package Dao;
 
 import entity.Sharesentity;
+import entity.VideoEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
@@ -54,15 +55,22 @@ public class ShareDao implements GenericDao<Sharesentity> {
         TypedQuery<Sharesentity> query = em.createQuery(jpql, Sharesentity.class);
         return query.getResultList();
     }
+    public void updateViews(int videoId) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
 
-    // Phương thức trả về shareCount theo VideoId
-//    public List<Object[]> getShareCountByVideo() {
-//        String jpql = "SELECT s.videosentity.id, s.videosentity.title, s.shareCount " +
-//                "FROM Sharesentity s";
-//        TypedQuery<Object[]> query = em.createQuery(jpql, Object[].class);
-//        return query.getResultList();
-//    }
+        // Lấy video từ cơ sở dữ liệu theo ID
+        VideoEntity video = em.find(VideoEntity.class, videoId);
 
+        if (video != null) {
+            // Tăng lượt xem lên 1
+            video.setViews(video.getViews() + 1);
 
+            // Cập nhật video vào cơ sở dữ liệu
+            em.merge(video);
+        }
+
+        transaction.commit();
+    }
 
 }
