@@ -50,4 +50,26 @@ public class ShareServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error processing share request");
         }
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            // Lấy danh sách tất cả các chia sẻ
+            List<Sharesentity> shares = shareDao.findAll();
+
+            // Lấy danh sách video để hiển thị nếu cần
+            List<VideoEntity> videos = videosDao.findAll();
+
+            // Gán dữ liệu vào request attribute
+            request.setAttribute("shares", shares);
+            request.setAttribute("videos", videos);
+
+            // Chuyển tiếp đến trang JSP để hiển thị
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/chiase.jsp");
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error loading share data");
+        }
+    }
 }

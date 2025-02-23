@@ -103,7 +103,7 @@
 
             <!-- Additional Actions -->
             <div class="additional-actions">
-                <a href="/" class="btn btn-outline-light w-100">
+                <a href="${pageContext.request.contextPath}/index" class="btn btn-outline-light w-100">
                     <i class="bi bi-arrow-left"></i>
                     Quay lại trang chủ
                 </a>

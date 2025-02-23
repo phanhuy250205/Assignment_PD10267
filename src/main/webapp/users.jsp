@@ -19,7 +19,7 @@
   <aside class="sidebar">
     <div class="sidebar-header">
       <img src="https://via.placeholder.com/40" alt="Logo" class="logo">
-      <h1>Dashboard</h1>
+      <a href="${pageContext.request.contextPath}/index" style="text-decoration: none"> <h1>Dashboard</h1></a>
     </div>
     <nav class="sidebar-nav">
       <a href="quanlyvideo.jsp" class="nav-link">
@@ -62,9 +62,7 @@
     <div class="content-area">
       <div class="content-header">
         <h2>User Management</h2>
-        <button class="btn-primary" onclick="document.getElementById('addUserModal').style.display='flex'">
-          <i class="fas fa-user-plus"></i> Add New User
-        </button>
+
       </div>
 
       <!-- Stats Cards -->

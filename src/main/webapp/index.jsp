@@ -108,9 +108,9 @@
                     <li>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/listvideo">Nhà Phát triển</a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/share">Quản lý chia sẻ</a>
-                    </li>
+<%--                    <li>--%>
+<%--                        <a class="dropdown-item" href="${pageContext.request.contextPath}/share">Quản lý chia sẻ</a>--%>
+<%--                    </li>--%>
                     <li>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/changePassword">Đổi mật khẩu</a>
                     </li>
@@ -138,11 +138,11 @@
                 <i class="bi bi-house"></i>
                 <span>Trang Chủ</span>
             </a>
-            <a href="/trending" class="menu-item">
+            <a href="${pageContext.request.contextPath}/index" class="menu-item">
                 <i class="bi bi-fire"></i>
                 <span>Thịnh hành</span>
             </a>
-            <a href="/live" class="menu-item">
+            <a href="${pageContext.request.contextPath}/index" class="menu-item">
                 <i class="bi bi-broadcast"></i>
                 <span>Trực tiếp</span>
             </a>
@@ -150,7 +150,7 @@
 
         <div class="menu-group">
             <h3 class="menu-title">Bộ sưu tập</h3>
-            <a href="/history" class="menu-item">
+            <a href="${pageContext.request.contextPath}/index" class="menu-item">
                 <i class="bi bi-clock-history"></i>
                 <span>Lịch sử xem</span>
             </a>

@@ -1,6 +1,8 @@
 package entity;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,9 +41,8 @@ public class VideoEntity {
     private Usersentity user;
 
     // Quan hệ một-nhiều với CommentEntity
-    @OneToMany(mappedBy = "video")
-    private Set<Comment> comments;
-
+    @OneToMany(mappedBy = "video", cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
 
 
     // Một video có thể có nhiều bình luận
@@ -128,11 +129,11 @@ public class VideoEntity {
     }
 
     public Set<Comment> getComments() {
-        return comments;
+        return (Set<Comment>) comments;
     }
 
     public void setComments(Set<Comment> comments) {
-        this.comments = comments;
+        this.comments = (List<Comment>) comments;
     }
 
     @Override

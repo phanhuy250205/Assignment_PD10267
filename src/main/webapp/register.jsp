@@ -48,71 +48,11 @@
         <label for="password">Password</label>
       </div>
 
-      <div class="password-requirements">
-        <h6 class="mb-2">Password must contain:</h6>
-        <div class="requirement-item">
-          <i class="bi bi-check-circle"></i>
-          <span>At least 8 characters</span>
-        </div>
-        <div class="requirement-item">
-          <i class="bi bi-check-circle"></i>
-          <span>Upper & lowercase letters</span>
-        </div>
-        <div class="requirement-item">
-          <i class="bi bi-check-circle"></i>
-          <span>At least one number</span>
-        </div>
-        <div class="requirement-item">
-          <i class="bi bi-check-circle"></i>
-          <span>At least one special character</span>
-        </div>
-      </div>
+
 
       <div class="form-floating">
         <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required name="confirm_password">
         <label for="confirmPassword">Confirm Password</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <select class="form-select" id="userRole" name="userRole" required>
-          <option value="">Select role...</option>
-          <option value="user">Regular User</option>
-          <option value="creator">Content Creator</option>
-          <option value="moderator">Moderator</option>
-          <option value="admin">Administrator</option>
-        </select>
-        <label for="userRole">Your Role</label>
-      </div>
-
-      <div class="role-description">
-        <div class="role-info user-role">
-          <i class="bi bi-person"></i>
-          <div>
-            <h6 class="mb-1">Regular User</h6>
-            <p class="mb-0">View and interact with content</p>
-          </div>
-        </div>
-        <div class="role-info creator-role">
-          <i class="bi bi-camera-video"></i>
-          <div>
-            <h6 class="mb-1">Content Creator</h6>
-            <p class="mb-0">Upload and manage video content</p>
-          </div>
-        </div>
-        <div class="role-info moderator-role">
-          <i class="bi bi-shield-check"></i>
-          <div>
-            <h6 class="mb-1">Moderator</h6>
-            <p class="mb-0">Moderate content and users</p>
-          </div>
-        </div>
-        <div class="role-info admin-role">
-          <i class="bi bi-gear"></i>
-          <div>
-            <h6 class="mb-1">Administrator</h6>
-            <p class="mb-0">Manage entire system</p>
-          </div>
-        </div>
       </div>
 
       <div class="form-check mb-3">

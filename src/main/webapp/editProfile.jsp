@@ -55,38 +55,8 @@
                 </div>
 
                 <!-- Giới thiệu bản thân -->
-                <div class="form-floating">
-                    <textarea class="form-control" id="bio" placeholder="Giới thiệu bản thân" style="height: 100px"></textarea>
-                    <label for="bio">Giới thiệu bản thân</label>
-                </div>
 
-                <!-- Ngôn ngữ -->
-                <div class="form-floating">
-                    <select class="form-select" id="language" name="language">
-                        <option value="vi" >Tiếng Việt</option>
-                        <option value="en" >English</option>
-                        <option value="fr" >Français</option>
-                        <option value="de" >Deutsch</option>
-                    </select>
-                    <label for="language">Ngôn ngữ</label>
-                </div>
 
-                <!-- Social Links -->
-                <div class="social-links">
-                    <h6>Liên kết mạng xã hội</h6>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-facebook"></i></span>
-                        <input type="text" class="form-control" placeholder="Link Facebook" >
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-youtube"></i></span>
-                        <input type="text" class="form-control" placeholder="Link YouTube">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-twitter-x"></i></span>
-                        <input type="text" class="form-control" placeholder="Link Twitter" >
-                    </div>
-                </div>
 
                 <!-- Notification Settings -->
                 <div class="notification-settings">

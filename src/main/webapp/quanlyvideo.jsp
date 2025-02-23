@@ -6,7 +6,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">Dashboard
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
     <aside class="sidebar">
         <div class="sidebar-header">
             <img src="https://media.istockphoto.com/id/1979289147/vi/anh/khoa-h%E1%BB%8Dc-ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0-d%E1%BB%AF-li%E1%BB%87u-l%E1%BB%9Bn-v%E1%BB%9Bi-c%C3%B4ng-ngh%E1%BB%87-ai-nh%C3%A0-ph%C3%A2n-t%C3%ADch-ho%E1%BA%B7c-nh%C3%A0-khoa-h%E1%BB%8Dc-s%E1%BB%AD.jpg?s=2048x2048&w=is&k=20&c=kHpQ9kVVIpug7OKpx9rJCdxeL3ZeqfRr02XfT-PlxhE=" alt="Logo" class="logo">
-            <h1>Dashboard</h1>
+           <a href="${pageContext.request.contextPath}/index" style="text-decoration: none"> <h1>Dashboard</h1></a>
         </div>
         <nav class="sidebar-nav">
             <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link active">
@@ -72,14 +72,7 @@
                 <span>Users</span>
                 <span class="badge bg-info">12</span>
             </a>
-<%--            <a href="${pageContext.request.contextPath}/admin/dashboard.jsp" class="nav-link">--%>
-<%--                <i class="fas fa-chart-bar"></i>--%>
-<%--                <span>Dashboard</span>--%>
-<%--            </a>--%>
-<%--            <a href="#" class="nav-link">--%>
-<%--                <i class="fas fa-cog"></i>--%>
-<%--                <span>Chỉnh sửa video </span>--%>
-<%--            </a>--%>
+
         </nav>
     </aside>
 
