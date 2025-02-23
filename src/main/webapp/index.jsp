@@ -55,6 +55,14 @@
         });
     }
 </script>
+
+<%-- Thêm đoạn này vào phần đầu của index.jsp --%>
+<c:if test="${not empty sessionScope.success}">
+    <div class="alert alert-success text-center" role="alert" id="successMsg">
+        <c:out value="${sessionScope.success}" />
+    </div>
+    <c:remove var="success" scope="session"/>
+</c:if>
 <header class="main-header">
     <div class="header-left">
 

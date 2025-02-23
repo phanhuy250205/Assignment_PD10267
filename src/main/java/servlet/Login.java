@@ -61,31 +61,32 @@ public class Login extends HttpServlet {
                 return;
             }
 
-            // Mã hóa mật khẩu người dùng nhập vào
-
-            // Tìm người dùng trong cơ sở dữ liệu với mật khẩu đã mã hóa
-            Usersentity user = userDao.findByUsernameAndPassword(username,password);
+            // Tìm người dùng trong cơ sở dữ liệu
+            Usersentity user = userDao.findByUsernameAndPassword(username, password);
 
             if (user != null) {
                 // Nếu đăng nhập thành công, lưu thông tin vào session
                 HttpSession session = req.getSession();
                 session.setAttribute("userId", user.getId());
                 session.setAttribute("fullname", user.getFullname());
-                boolean isAdmin = user.isAdmin();  // Giả sử `isAdmin` là phương thức trả về giá trị true/false
+                boolean isAdmin = user.isAdmin();
                 session.setAttribute("isAdmin", isAdmin);
 
-                // Chuyển hướng tới trang chủ (index.jsp)
-                resp.sendRedirect(req.getContextPath() + "/index");
+                // Lưu thông báo vào session và chuyển hướng
+                session.setAttribute("success", "Đăng nhập thành công!");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");  // Chuyển hướng thay vì forward
             } else {
                 // Nếu đăng nhập không thành công
-                req.setAttribute("error", "Invalid username or password.");
+                req.setAttribute("error", "Tên đăng nhập hoặc mật khẩu không chính xác.");
                 req.getRequestDispatcher("/login.jsp").forward(req, resp);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            // Xử lý lỗi nếu có sự cố xảy ra
             req.setAttribute("error", "An error occurred. Please try again later.");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
         }
     }
+
+
+
 }

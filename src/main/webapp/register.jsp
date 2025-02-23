@@ -48,8 +48,6 @@
         <label for="password">Password</label>
       </div>
 
-
-
       <div class="form-floating">
         <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required name="confirm_password">
         <label for="confirmPassword">Confirm Password</label>
@@ -63,9 +61,14 @@
         </label>
       </div>
 
-      <button type="submit" class="btn btn-primary w-100 register-btn">
+      <button id="registerBtn" type="submit" class="btn btn-primary w-100 register-btn">
         Register
       </button>
+
+      <!-- Thêm thông báo lỗi, hiển thị khi có lỗi từ server -->
+      <div id="errorMsg" class="alert alert-danger" style="display: none;">
+        Tài khoản đã tồn tại! Vui lòng chọn email khác.
+      </div>
 
       <div class="social-register">
         <a href="#" class="social-btn">
@@ -105,18 +108,16 @@
     }
   }
 
-  // Add event listeners
+  // Add event listeners for image upload
   document.getElementById('imageUpload').addEventListener('change', function() {
     readURL(this);
   });
 
-  document.getElementById('userRole').addEventListener('change', function() {
-    const roleInfos = document.querySelectorAll('.role-info');
-    roleInfos.forEach(info => info.classList.remove('active'));
-
-    const selectedRole = this.value;
-    if (selectedRole) {
-      document.querySelector(`.${selectedRole}-role`).classList.add('active');
+  // Show error message if it has content (assuming error message comes from the server)
+  document.addEventListener("DOMContentLoaded", function() {
+    var errorMsg = document.getElementById("errorMsg"); // Đúng cú pháp
+    if (errorMsg && errorMsg.innerText.trim() !== "") {
+      errorMsg.style.display = "block";  // Hiển thị thông báo lỗi
     }
   });
 </script>

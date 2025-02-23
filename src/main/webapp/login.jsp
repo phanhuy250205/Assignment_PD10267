@@ -26,10 +26,21 @@
 
     <%-- Hiển thị thông báo lỗi nếu có --%>
     <c:if test="${not empty error}">
-      <div class="alert alert-danger text-center" role="alert">
+      <div class="alert alert-danger text-center" role="alert" id="error">
         <c:out value="${error}" />
       </div>
     </c:if>
+
+    <%-- Hiển thị thông báo thành công nếu có --%>
+    <c:if test="${not empty sessionScope.success}">
+      <div class="alert alert-success text-center" role="alert" id="successMsg">
+        <c:out value="${sessionScope.success}" />
+      </div>
+      <c:remove var="success" scope="session"/>
+    </c:if>
+
+
+
 
     <form action="${pageContext.request.contextPath}/login" method="post">
       <div class="form-floating mb-3">
@@ -42,6 +53,7 @@
                 aria-label="Tên đăng nhập"
                 aria-required="true"
                 required
+                autofocus
                 value="<c:out value='${param.username}' />">
         <label for="username">Tên đăng nhập</label>
       </div>
@@ -70,10 +82,10 @@
             Ghi nhớ đăng nhập
           </label>
         </div>
-        <a href="${pageContext.request.contextPath}/doimatkhau.jsp"  class="forgot-password">Quên mật khẩu?</a>
+        <a href="${pageContext.request.contextPath}/doimatkhau.jsp" class="forgot-password">Quên mật khẩu?</a>
       </div>
 
-      <button type="submit" class="btn btn-primary w-100 login-btn mb-3">
+      <button id="loginBtn" type="submit" class="btn btn-primary w-100 login-btn mb-3">
         Đăng nhập
       </button>
 
@@ -96,10 +108,6 @@
   </div>
 </div>
 
-<script>
-  // Tự động focus vào trường "username" khi trang tải
-  document.getElementById('username').focus();
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
